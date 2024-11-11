@@ -1,0 +1,29 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["tests/**/*", "**/*.worker.ts"],
+  "compilerOptions": {
+    "target": "ES2020",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": ["ES2020", "esnext", "dom", "dom.iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@*": ["./*"],
+      "@src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@composables/*": ["./src/composables/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@views/*": ["./src/views/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@plugins/*": ["./src/plugins/*"],
+      "@dependencies/*": ["./src/dependencies/*"]
+    }
+  }
+}

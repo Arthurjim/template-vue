@@ -1,0 +1,11 @@
+@use '../settings/colors' as *;
+
+@mixin card-container-m() {
+  border: 1px solid $color-border-default;
+  border-radius: 10px;
+}
+
+@mixin card-container-strong() {
+  border: 1px solid $color-border-strong;
+  border-radius: 10px;
+}

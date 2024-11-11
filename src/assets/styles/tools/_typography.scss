@@ -1,0 +1,64 @@
+@use '../settings/typography' as *;
+
+@mixin typography-display-s() {
+  font-family: $typography-display-s-font-family;
+  font-size: $typography-display-s-font-size-default;
+  font-weight: 300;
+  line-height: $typography-display-s-line-height-default;
+  letter-spacing: $typography-display-s-letter-spacing;
+}
+
+@mixin typography-title-l() {
+  font-family: $typography-title-l-font-family;
+  font-size: $typography-title-l-font-size;
+  font-weight: 300;
+  line-height: $typography-title-l-line-height;
+  letter-spacing: $typography-title-l-letter-spacing;
+}
+
+
+@mixin typography-label-s() {
+  font-family: $typography-label-font-family;
+  font-weight: 500;
+  font-size: $typography-label-s-font-size;
+  line-height: $typography-label-s-line-height;
+}
+
+@mixin typography-body-m() {
+  font-family: $typography-body-font-family;
+  font-size: $typography-body-m-font-size;
+  font-weight: 400;
+  line-height: $typography-body-m-line-height;
+  letter-spacing: $typography-body-m-letter-spacing;
+}
+
+@mixin typography-body-s() {
+  font-family: $typography-body-font-family;
+  font-size: $typography-body-s-font-size;
+  font-weight: 400;
+  line-height: $typography-body-s-line-height;
+  letter-spacing: $typography-body-s-letter-spacing;
+}
+
+@mixin typography-body-xs() {
+  font-family: $typography-body-font-family;
+  font-size: $typography-body-xs-font-size;
+  font-weight: 400;
+  line-height: $typography-body-xs-line-height;
+  letter-spacing: $typography-body-xs-letter-spacing;
+}
+
+@mixin typography-inner() {
+  font-family: $typography-title-xs-font-family;
+  font-weight: 400;
+  font-size: $typography-title-xs-font-size;
+  line-height: $typography-title-xs-line-height;
+}
+
+@mixin typography-title-xs(){
+  font-family: $typography-title-xs-font-family;
+  font-weight: 400;
+  font-size: $typography-title-xs-font-size;
+  line-height: $typography-title-xs-line-height;
+  letter-spacing: $typography-title-xs-letter-spacing;
+}

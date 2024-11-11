@@ -1,0 +1,25 @@
+{
+  "extends": ["@commitlint/config-conventional"],
+  "rules": {
+    "type-enum": [
+      2,
+      "always",
+      [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert",
+        "merge-dev",
+        "merge-qa",
+        "merge-prod"
+      ]
+    ],
+    "header-max-length": [2, "always", 65],
+    "header-min-length": [2, "always", 10]
+  }
+}
