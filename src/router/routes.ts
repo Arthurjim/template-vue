@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import { logged } from './middleware/logged'
+// import { logged } from './middleware/logged'
 import { auth } from './middleware/auth'
 
 import Layout from '@layouts/Layout.vue'
@@ -16,10 +16,15 @@ const routerOptions: RouteRecordRaw[] = [
       {
         path: '',
         name: 'Home',
-        component: () => import('@views/Home.vue'),
-        meta: {
-          middleware: [logged]
-        }
+        component: () => import('@views/Home.vue')
+        // meta: {
+        //   middleware: [logged]
+        // }
+      },
+      {
+        path: 'pokemon/:name',
+        name: 'Pokemon',
+        component: () => import('@views/Pokemon.vue')
       }
     ]
   },

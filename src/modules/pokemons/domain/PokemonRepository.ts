@@ -1,6 +1,6 @@
-import { Pokemon } from "./Pokemon";
+import { Pokemon } from './Pokemon'
 
 export interface PokemonRepository {
-    search: (name: string) => Promise<Pokemon>
-    searchAll: () => Promise<Pokemon[]>
+  search: (name: string) => Promise<Pokemon>
+  searchAll: () => Promise<Pokemon[]>
 }

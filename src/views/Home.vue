@@ -1,25 +1,57 @@
-<template>
-    <section class="m-6  flex gap-6">
-        <tpc-search-field placeholder="Search" v-model="searchPokemon"/>
-        <tpc-button @click="search" size="large">Search</tpc-button>
-    </section>
-</template>
+<script lang="ts" setup>
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
 
-<script setup lang="ts">
-    import { ref, inject } from 'vue';
-    import type { ProvideUseCasePokemon } from '../dependencies/Pokemon';
-    type providerPokemon = ProvideUseCasePokemon | undefined
+import { onMounted, ref, watch } from 'vue'
+import { usePokemonStore } from '@stores/Pokemon'
+import { storeToRefs } from 'pinia'
+import { usePokemon } from '@src/composables/Pokemons'
+import type { Primitive } from '@src/modules/pokemons/domain/Pokemon'
+import router from '@src/router'
+const { getters } = usePokemon()
+const { pokemons } = storeToRefs(usePokemonStore())
 
-    const searchPokemon = ref('');
-    const search = async () => {
-        const provider = inject<providerPokemon>('providerPokemon', undefined)
-        if (!provider) return
+const pokemonTemps = ref<Primitive[]>([])
 
-        const response = await provider.pokemonSearcher.execute()
-        console.log(response);
-    };
+const searchPokemon = ref('')
+
+onMounted(async () => {
+  await getters()
+  pokemonTemps.value = pokemons.value
+})
+
+watch(searchPokemon, () => {
+  const pokemonsFilter = pokemons.value.filter((pokemon) => {
+    return pokemon.name.includes(searchPokemon.value)
+  })
+  if (!pokemonsFilter.length) {
+    pokemonTemps.value = pokemons.value
+    return
+  }
+
+  pokemonTemps.value = pokemonsFilter
+})
+
+const goPokemon = async (name: string) => {
+  await router.push({ name: 'Pokemon', params: { name } })
+}
 </script>
 
-<style scoped>
+<template>
+  <section class="m-6 flex gap-6">
+    <tpc-search-field v-model="searchPokemon" label="Search" />
+  </section>
 
-</style>
+  <div class="m-6">
+    <DataTable :value="pokemonTemps" striped-rows>
+      <Column field="name" header="Name"></Column>
+      <Column field="url" header="Profile">
+        <template #body="slotProps">
+          <tpc-button type="secondary" @click="goPokemon(slotProps.data.name)">Profile</tpc-button>
+        </template>
+      </Column>
+    </DataTable>
+  </div>
+</template>
+
+<style scoped></style>

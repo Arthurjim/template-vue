@@ -1,15 +1,22 @@
-import type { Http } from "@src/modules/shared/domain/Http";
-import type { PokemonRepository } from "../domain/PokemonRepository";
-import { Pokemon } from "../domain/Pokemon";
+import type { Http } from '@src/modules/shared/domain/Http'
+import type { PokemonRepository } from '../domain/PokemonRepository'
+import { Pokemon } from '../domain/Pokemon'
+import type { PokemonDTO } from '../domain/dto/PokemonDTO'
 
-export class ApiPokemonRepository implements PokemonRepository{
-    constructor (private readonly http: Http) {}
+interface PokemonResponse {
+  results: PokemonDTO[]
+}
 
-    async searchAll(): Promise<Pokemon[]> {
-        return await this.http.get<Pokemon[]>('pokemons')
-    }
+export class ApiPokemonRepository implements PokemonRepository {
+  constructor(private readonly http: Http) {}
 
-    async search(): Promise<Pokemon> {
-        throw new Error('Method not implemented.')
-    }
+  async searchAll(): Promise<Pokemon[]> {
+    const response = await this.http.get<PokemonResponse>('/')
+    return response.results.map((pokemon) => Pokemon.fromPrimitive(pokemon))
+  }
+
+  async search(name: string): Promise<Pokemon> {
+    const response = await this.http.get(`/${name}`)
+    return Pokemon.fromPrimitive(response)
+  }
 }

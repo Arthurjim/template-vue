@@ -1,5 +1,5 @@
 {
-  "name": "gastronomy-misc-fe",
+  "name": "template-vue",
   "private": true,
   "version": "0.0.1",
   "type": "commonjs",
@@ -17,11 +17,11 @@
   "dependencies": {
     "@aws-amplify/pubsub": "6.0.27",
     "@datadog/browser-rum": "^5.23.3",
-    "@prcomponents/pr-components-library": "0.4.2",
-    "@selemondev/vue3-signature-pad": "^1.1.0",
+    "@prcomponents/pr-components-library": "0.4.6",
+    "@primevue/themes": "^4.2.1",
     "aws-amplify": "^6.0.27",
-    "crypto-js": "^4.2.0",
     "pinia": "^2.1.7",
+    "primevue": "^4.2.1",
     "vue": "^3.3.11",
     "vue-i18n": "9",
     "vue-router": "^4.2.5"

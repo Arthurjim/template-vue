@@ -19,8 +19,8 @@ export default defineConfig({
       includeAssets: ['/crown.svg'],
       strategies: 'injectManifest',
       manifest: {
-        name: 'Misc Palace',
-        short_name: 'Misc Palace',
+        name: 'Template Palace',
+        short_name: 'Template Palace',
         theme_color: '#fff',
         start_url: '/',
         display: 'standalone',

@@ -30,7 +30,7 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach((to) => {
-  const DEFAULT_TITLE = 'Misc Palace'
+  const DEFAULT_TITLE = 'Template Palace'
   document.title = (to.meta.title as string) ?? DEFAULT_TITLE
 })
 
