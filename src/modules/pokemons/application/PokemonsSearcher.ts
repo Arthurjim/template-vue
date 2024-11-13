@@ -1,10 +1,10 @@
-import { Pokemon } from '../domain/Pokemon'
+import type { PokemonListDTO } from '../domain/dto/ListPokemonDTO'
 import type { PokemonRepository } from '../domain/PokemonRepository'
 
 export class PokemonsSearcher {
   constructor(private readonly repository: PokemonRepository) {}
 
-  async execute(): Promise<Pokemon[]> {
+  async execute(): Promise<PokemonListDTO[]> {
     return await this.repository.searchAll()
   }
 }

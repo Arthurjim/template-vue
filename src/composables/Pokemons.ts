@@ -5,23 +5,34 @@ import { usePokemonStore } from '@stores/Pokemon'
 import { Logger } from '@src/utils/log/Logger'
 
 export interface UsePokemon {
-  getters: () => Promise<void>
+  getAll: () => Promise<void>
+  getProfile: (name: string) => Promise<void>
 }
 
 type ProviderPokemon = ProviderUseCaseGuest | undefined
 
 export function usePokemon(): UsePokemon {
   const provider = inject<ProviderPokemon>('providerPokemon', undefined)
-  const { pokemon, pokemons } = storeToRefs(usePokemonStore())
-  const getters = async () => {
+  const { pokemons, pokemon } = storeToRefs(usePokemonStore())
+  const getAll = async () => {
     if (!provider) return
     pokemons.value = []
     try {
       const response = await provider.pokemonSearcher.execute()
 
-      if (response.length > 0) {
-        pokemons.value = response.map((pokemon) => pokemon.toPrimitive())
-      }
+      pokemons.value = response
+    } catch (error) {
+      Logger.debug('error', error)
+      throw error
+    }
+  }
+
+  const getProfile = async (name: string) => {
+    if (!provider) return
+    try {
+      const response = await provider.pokemonProfileSearcher.execute(name)
+      pokemon.value = response.toPrimitive()
+      Logger.debug('response', response)
     } catch (error) {
       Logger.debug('error', error)
       throw error
@@ -29,6 +40,7 @@ export function usePokemon(): UsePokemon {
   }
 
   return {
-    getters
+    getAll,
+    getProfile
   }
 }

@@ -6,17 +6,17 @@ import { onMounted, ref, watch } from 'vue'
 import { usePokemonStore } from '@stores/Pokemon'
 import { storeToRefs } from 'pinia'
 import { usePokemon } from '@src/composables/Pokemons'
-import type { Primitive } from '@src/modules/pokemons/domain/Pokemon'
 import router from '@src/router'
-const { getters } = usePokemon()
-const { pokemons } = storeToRefs(usePokemonStore())
+import type { PokemonListDTO } from '@src/modules/pokemons/domain/dto/ListPokemonDTO'
+const { getAll } = usePokemon()
+const { pokemons, pokemonSelected } = storeToRefs(usePokemonStore())
 
-const pokemonTemps = ref<Primitive[]>([])
+const pokemonTemps = ref<PokemonListDTO[]>([])
 
 const searchPokemon = ref('')
 
 onMounted(async () => {
-  await getters()
+  await getAll()
   pokemonTemps.value = pokemons.value
 })
 
@@ -33,6 +33,7 @@ watch(searchPokemon, () => {
 })
 
 const goPokemon = async (name: string) => {
+  pokemonSelected.value = name
   await router.push({ name: 'Pokemon', params: { name } })
 }
 </script>
