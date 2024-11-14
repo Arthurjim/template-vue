@@ -10,7 +10,7 @@ export const config = {
   API: {
     REST: {
       api: {
-        endpoint: import.meta.env.VITE_GASTRONOMY_API ?? ''
+        endpoint: import.meta.env.VITE_BASE_API ?? ''
       },
       auth: {
         endpoint: import.meta.env.VITE_AUTH_API ?? ''

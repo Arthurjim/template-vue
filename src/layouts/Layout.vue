@@ -1,10 +1,7 @@
-<script setup lang="ts">
-import Header from '@components/Header.vue'
-</script>
-
+<script setup lang="ts"></script>
 <template>
   <main class="relative flex flex-col min-h-screen">
-    <tpc-navigation-bar context="onBrand"/>
+    <tpc-navigation-bar context="onBrand" />
     <router-view />
   </main>
 </template>

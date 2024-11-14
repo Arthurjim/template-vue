@@ -11,8 +11,8 @@ interface PokemonResponse {
 export class ApiPokemonRepository implements PokemonRepository {
   constructor(private readonly http: Http) {}
 
-  async searchAll(): Promise<PokemonListDTO[]> {
-    const response = await this.http.get<PokemonResponse>('/')
+  async searchAll(page: number): Promise<PokemonListDTO[]> {
+    const response = await this.http.get<PokemonResponse>(`/?limit=100&offset=${page * 10}`)
     return response.results
   }
 

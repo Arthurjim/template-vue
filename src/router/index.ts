@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Routes from './routes'
 
-import { useAuth } from '@composables/Auth'
+// import { useAuth } from '@composables/Auth'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -9,8 +9,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const { init } = useAuth()
-  await init()
   /** Navigate to next if middleware is not applied */
   if (typeof to.meta.middleware === 'undefined') {
     return next()
