@@ -7,6 +7,7 @@ import { Logger } from '@src/utils/log/Logger'
 export interface UsePokemon {
   getAll: (page: number) => Promise<void>
   getProfile: (name: string) => Promise<void>
+  resetPokemon: () => void
 }
 
 type ProviderPokemon = ProviderUseCaseGuest | undefined
@@ -32,6 +33,7 @@ export function usePokemon(): UsePokemon {
     try {
       const response = await provider.pokemonProfileSearcher.execute(name)
       pokemon.value = response.toPrimitive()
+      sessionStorage.setItem('pokemon', JSON.stringify(pokemon.value))
       Logger.debug('response', response)
     } catch (error) {
       Logger.debug('error', error)
@@ -39,8 +41,19 @@ export function usePokemon(): UsePokemon {
     }
   }
 
+  const resetPokemon = () => {
+    pokemon.value = {
+      id: 0,
+      name: '',
+      weight: 0,
+      height: 0,
+      sprite: ''
+    }
+  }
+
   return {
     getAll,
-    getProfile
+    getProfile,
+    resetPokemon
   }
 }

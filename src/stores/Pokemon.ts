@@ -12,8 +12,10 @@ export const usePokemonStore = defineStore('pokemon', () => {
     sprite: ''
   }
   const pokemonSelected = ref('')
+  const pokemonStorage = sessionStorage.getItem('pokemon')
 
-  const pokemon: Ref<Primitive> = ref(payload)
+  const parsedPokemon = pokemonStorage ? JSON.parse(pokemonStorage) : payload
+  const pokemon: Ref<Primitive> = ref(parsedPokemon)
   const pokemons: Ref<PokemonListDTO[]> = ref([])
 
   return {

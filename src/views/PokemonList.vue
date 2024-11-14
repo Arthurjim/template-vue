@@ -5,10 +5,10 @@ import { ref, computed, onMounted } from 'vue'
 import { usePokemonStore } from '@stores/Pokemon'
 import { storeToRefs } from 'pinia'
 import { usePokemon } from '@src/composables/Pokemons'
-import router from '@src/router'
+import { useRouter } from 'vue-router'
 import type { PokemonListDTO } from '@src/modules/pokemons/domain/dto/ListPokemonDTO'
 
-// Obtener métodos y referencias del store y composable
+const router = useRouter()
 const { getAll } = usePokemon()
 const { pokemons, pokemonSelected } = storeToRefs(usePokemonStore())
 
@@ -35,31 +35,32 @@ onMounted(fetchPokemons)
 </script>
 
 <template>
-  <section class="m-6 flex gap-6">
-    <tpc-search-field v-model="searchPokemon" label="Search" />
-  </section>
-
-  <div class="flex justify-center">
-    <DataTable
-      v-if="filteredPokemons.length"
-      :value="filteredPokemons"
-      striped-rows
-      paginator
-      :rows="5"
-      table-style="min-width: 50rem"
-    >
-      <Column field="name" header="Name"></Column>
-      <Column field="url" header="Profile">
-        <template #body="{ data }">
-          <tpc-button type="secondary" @click="goPokemon(data.name)">Profile</tpc-button>
-        </template>
-      </Column>
-    </DataTable>
-
-    <div v-else>
-      <span class="message-not-found tpc-t-title-m">Not Found</span>
+  <section class="m-6 flex gap-6 flex-col items-center">
+    <div class="w-2/3">
+      <tpc-search-field v-model="searchPokemon" label="Search" />
     </div>
-  </div>
+
+    <div class="flex justify-center w-2/3 mt-4">
+      <DataTable
+        v-if="filteredPokemons.length"
+        :value="filteredPokemons"
+        striped-rows
+        paginator
+        :rows="5"
+        class="w-full"
+      >
+        <Column field="name" header="Name"></Column>
+        <Column field="url" header="Profile">
+          <template #body="{ data }">
+            <tpc-button type="secondary" @click="goPokemon(data.name)">Profile</tpc-button>
+          </template>
+        </Column>
+      </DataTable>
+      <div v-else>
+        <span class="message-not-found tpc-t-title-m">Not Found</span>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>

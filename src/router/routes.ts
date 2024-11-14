@@ -7,6 +7,22 @@ import Layout from '@layouts/Layout.vue'
 const routerOptions: RouteRecordRaw[] = [
   {
     path: '/',
+    name: 'Layout',
+    component: Layout,
+    redirect: { name: 'Login' },
+    children: [
+      {
+        path: '',
+        name: 'Login',
+        component: () => import('@views/Login.vue'),
+        meta: {
+          // middleware: [logged]
+        }
+      }
+    ]
+  },
+  {
+    path: '/pokemons',
     name: 'Home',
     component: Layout,
     redirect: { name: 'Pokemons' },
@@ -17,7 +33,7 @@ const routerOptions: RouteRecordRaw[] = [
         component: () => import('@views/PokemonList.vue')
       },
       {
-        path: 'pokemon/:name',
+        path: '/pokemons/:name',
         name: 'Pokemon',
         component: () => import('@views/PokemonProfile.vue')
       }

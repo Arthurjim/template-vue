@@ -1,3 +1,28 @@
+<script setup lang="ts">
+import { usePokemon } from '@src/composables/Pokemons'
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { usePokemonStore } from '@src/stores/Pokemon'
+import { Card } from 'primevue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const { pokemonSelected, pokemon } = storeToRefs(usePokemonStore())
+
+const { getProfile, resetPokemon } = usePokemon()
+
+onMounted(() => {
+  if (pokemonSelected.value) {
+    getProfile(pokemonSelected.value)
+  }
+})
+
+const goHome = async () => {
+  resetPokemon()
+  await router.push({ name: 'Home' })
+}
+</script>
+
 <template>
   <Card style="width: 55rem; overflow: hidden">
     <template #header>
@@ -6,11 +31,20 @@
         <TpcSkeleton v-else type="rectangle" class="tpc-flex tpc-mb-2" />
       </div>
     </template>
-    <template #title>{{ pokemon.name }}</template>
-    <template #subtitle>Card subtitle</template>
+    <template #title>
+      <div class="flex justify-center">
+        <span class="tpc-t-title-m">{{ pokemon.name }}</span>
+      </div>
+    </template>
     <template #content>
-      <p class="m-0">Weight: {{ pokemon.weight }}</p>
-      <p class="m-0">height: {{ pokemon.height }}</p>
+      <div class="flex justify-center my-3">
+        <span class="mr-1">{{ $t('CardPokemon.Weight') }}:</span>
+        <span>{{ pokemon.weight }}</span>
+      </div>
+      <div class="flex justify-center">
+        <span class="mr-1">{{ $t('CardPokemon.Height') }}:</span>
+        <span>{{ pokemon.height }} </span>
+      </div>
     </template>
     <template #footer>
       <div class="flex gap-4 mt-1">
@@ -21,27 +55,5 @@
     </template>
   </Card>
 </template>
-
-<script setup lang="ts">
-import { usePokemon } from '@src/composables/Pokemons'
-import { onMounted } from 'vue'
-import { storeToRefs } from 'pinia'
-import { usePokemonStore } from '@src/stores/Pokemon'
-import { Card } from 'primevue'
-import router from '@src/router'
-const { pokemonSelected, pokemon } = storeToRefs(usePokemonStore())
-
-const { getProfile } = usePokemon()
-
-onMounted(() => {
-  if (pokemonSelected.value) {
-    getProfile(pokemonSelected.value)
-  }
-})
-
-const goHome = async () => {
-  await router.push({ name: 'Home' })
-}
-</script>
 
 <style scoped></style>
