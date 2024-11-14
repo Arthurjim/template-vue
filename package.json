@@ -17,7 +17,7 @@
   "dependencies": {
     "@aws-amplify/pubsub": "6.0.27",
     "@datadog/browser-rum": "^5.23.3",
-    "@prcomponents/pr-components-library": "^0.4.12",
+    "@prcomponents/pr-components-library": "^0.4.13",
     "@primevue/themes": "^4.2.1",
     "aws-amplify": "^6.0.27",
     "pinia": "^2.1.7",
